@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
             const token = await UserLogin.generateAuthToken();
                 console.log(token)
                 res.cookie('jsonwebtoken', token, {
-                    expires: new Date(Date.now + 2500000)
+                    expires: new Date(Date.now() + 2500000)
                 })
             const isMatch = await bcrypt.compare(password, UserLogin.password)
             if (isMatch) {
@@ -91,7 +91,6 @@ router.post("/login", async (req, res) => {
 
 })
 router.get('/logout',(req,res)=>{
-   
     res.clearCookie('jsonwebtoken',{path:'/'})
     res.status(201).send("logout successfully")
 })
